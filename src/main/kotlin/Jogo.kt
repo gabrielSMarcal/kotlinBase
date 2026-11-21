@@ -1,10 +1,10 @@
 package org.example
 
-class Jogo {
+class Jogo(val titulo:String,
+           val capa: String,) {
 
-    var titulo = ""
-    var capa = ""
-    var descricao = ""
+    val descricao = ""
+
 
 
     override fun toString(): String {
