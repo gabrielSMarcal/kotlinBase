@@ -1,5 +1,6 @@
 package org.example
 
+import com.google.gson.Gson
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -18,15 +19,7 @@ fun main() {
     val json = response.body()
     println(json)
 
-    val meuJogo = Jogo(
-        "The Witcher 3: Wild Hunt",
-        "https://cdn.akamai.steamstatic.com/steam/apps/292030/capsule_616x353.jpg?t=1686146400")
-
+    val gson = Gson()
+    val meuJogo = gson.fromJson(json, InfoJogo::class.java)
     println(meuJogo)
-
-    val novoJogo = Jogo(
-        capa="https://cdn.akamai.steamstatic.com/steam/apps/292030/capsule_616x353.jpg?t=1686146400",
-        titulo="The Witcher 3: Wild Hunt")
-
-    println(novoJogo)
 }
