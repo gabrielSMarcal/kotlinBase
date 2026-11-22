@@ -1,11 +1,14 @@
 package org.example
 
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse.BodyHandlers
+import java.util.EmptyStackException
 import java.util.Scanner
+import kotlin.coroutines.EmptyCoroutineContext
 
 
 fun main() {
@@ -29,11 +32,17 @@ fun main() {
     println(json)
 
     val gson = Gson()
-    val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
 
-    val meuJogo = Jogo(
-        meuInfoJogo.info.title,
-        meuInfoJogo.info.thumb)
+    try {
+        val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
 
-    println(meuJogo)
+        val meuJogo = Jogo(
+            meuInfoJogo.info.title,
+            meuInfoJogo.info.thumb)
+
+        println(meuJogo)
+    } catch (ex: JsonSyntaxException) {
+        println("Erro ao criar o objeto Jogo: ${ex.message}")
+    }
+
 }
