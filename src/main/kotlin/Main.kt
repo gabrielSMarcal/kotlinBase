@@ -33,7 +33,21 @@ fun main() {
 
     val gson = Gson()
 
-    try {
+
+//    try {
+//        val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
+//
+//        val meuJogo = Jogo(
+//            meuInfoJogo.info.title,
+//            meuInfoJogo.info.thumb)
+//
+//        println(meuJogo)
+//    } catch (ex: JsonSyntaxException) {
+//        println("Erro ao encontrar jogo: ${ex.message}")
+//    }
+
+    val resultado = runCatching {
+
         val meuInfoJogo = gson.fromJson(json, InfoJogo::class.java)
 
         val meuJogo = Jogo(
@@ -41,8 +55,22 @@ fun main() {
             meuInfoJogo.info.thumb)
 
         println(meuJogo)
-    } catch (ex: JsonSyntaxException) {
-        println("Erro ao criar o objeto Jogo: ${ex.message}")
+    }
+
+    resultado.onFailure {
+        println("Erro ao encontrar jogo: ${it.message}")
+    }
+
+    resultado.onSuccess {
+        println("Deseja inserir descrição personalizada? (s/n)")
+        val opcao = leitura.nextLine()
+        if (opcao.equals("s", true)) {
+            println("Insira a descrição personalizada: ")
+            val descricaoPersonalizada = leitura.nextLine()
+
+        } else {
+            println("Nenhuma descrição personalizada inserida.")
+        }
     }
 
 }
