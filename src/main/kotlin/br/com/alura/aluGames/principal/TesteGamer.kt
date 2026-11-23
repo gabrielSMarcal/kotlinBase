@@ -3,7 +3,7 @@ package org.example.br.com.alura.aluGames.principal
 import org.example.br.com.alura.aluGames.modelo.Gamer
 
 fun main() {
-    val gamer1 = Gamer("Malorc", "malorc@gmail.com")
+    val gamer1 = Gamer("   ", "malorc@gmail.com")
     println(gamer1)
 
     val gamer2 = Gamer("Mushva", "mushva@gmail.com", "10/10/2000", "mushva")
